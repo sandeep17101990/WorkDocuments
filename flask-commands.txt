@@ -1,0 +1,34 @@
+from flask import Flask, jsonify, request, Response
+import os
+from extractor import *
+
+app = Flask(__name__)
+
+
+@app.route('/', methods=['GET'])
+def home():
+    return " what you want to display when you hit the URL"
+
+
+@app.route('/api/v1/coe/platformservices', methods=['GET']) ==>URL and method description
+#@auth.login_required
+def get():
+    with app.app_context():
+        return extract() --> Function which should be returned when you hit the URL
+
+
+port = int(os.getenv("PORT", 9011))
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    app.run(host='0.0.0.0', port=port)
+
+
+
+
+-------------------------------------------------
+set FLASK_APP=app.py
+python app.py
+
+http://127.0.0.1:9011/api/v1/coe/platformservices
