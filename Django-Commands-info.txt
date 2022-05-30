@@ -8,7 +8,7 @@ python manage.py runserver   -- Django App run command
 First create a Model for the tabel name in models.py
 
 Example -----
-class ICHRMQstage(models.Model):
+class stage(models.Model):
     app_name = models.CharField(max_length=100)
     msg_count = models.DecimalField(max_digits = 11, decimal_places = 2)
     unack_msg_count = models.DecimalField(max_digits = 11, decimal_places = 2)
