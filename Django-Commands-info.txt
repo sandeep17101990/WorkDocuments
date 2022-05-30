@@ -1,0 +1,54 @@
+
+
+python manage.py makemigrations  --- To do the migrations when new Table is updated
+python manage.py migrate ---This will update the DB
+python manage.py runserver   -- Django App run command
+
+
+First create a Model for the tabel name in models.py
+
+Example -----
+class ICHRMQstage(models.Model):
+    app_name = models.CharField(max_length=100)
+    msg_count = models.DecimalField(max_digits = 11, decimal_places = 2)
+    unack_msg_count = models.DecimalField(max_digits = 11, decimal_places = 2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    #default = ''
+	
+
+Import in Admin from API Models and register them in admin.py
+
+Add in resource
+Import Models and Create a class in Resource
+Example-----
+
+class queue_stage(ModelResource):
+    class Meta:
+        queryset = stage.objects.all()
+        resource_name = 'stage'
+        #authorization = Authorization()
+        fields = ['app_name', 'msg_count', 'unack_msg_count']
+        include_resource_uri = False
+		
+
+
+In Admin create 
+from django.contrib import admin
+from api.models import Note
+from api.models import RMQ
+from api.models import FRT
+from api.models import MVG
+from api.models import MQstage
+
+# Register your models here.
+
+admin.site.register(Note)
+admin.site.register(RMQ)
+admin.site.register(FRT)
+admin.site.register(MVG)
+admin.site.register(stage)
+
+
+in URL's change the names import the function 
+and call in views.
+		
